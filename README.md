@@ -32,9 +32,10 @@ yum update
 yum install git
 git --version
 
-ใช้คำสั่ง git clone project api
 
 ----------------------------------
+ใช้คำสั่ง git clone project api
+
 mkdir ProjectName // สร้างโฟรเดอร์โปรเจค
 git clone git@gitlab.com:cockpitubon/cockpit-app.git
 cd cockpit-app
