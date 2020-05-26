@@ -3,6 +3,45 @@
 How to Install
 ============
 
+
+ขั้นตอนการติดตั้ง cockpit api app centos7
+
+Minimum required
+-	Node Js
+-	Angular Cli
+-	Express
+-	Typescript
+-	Git
+-	VS code
+-	Pm2
+
+ติดตั้ง  NodeJS 8.x
+-- centos
+curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+
+-- centos
+sudo yum -y install nodejs
+
+ติดตั้ง Express
+
+-- centos
+ npm install -g express-generator
+
+--centos
+yum update
+yum install git
+git --version
+
+ใช้คำสั่ง git clone project api
+
+----------------------------------
+mkdir ProjectName // สร้างโฟรเดอร์โปรเจค
+git clone git@gitlab.com:cockpitubon/cockpit-app.git
+cd cockpit-app
+npm i
+npm start
+----------------------------------
+
 ```bash
 git clone git@gitlab.com:cockpitubon/cockpit-app.git
 cp cockpit-app
