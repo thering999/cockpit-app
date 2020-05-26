@@ -1,0 +1,17 @@
+<clr-datagrid [clrDgLoading]="loading">
+    <ng-container>
+        <button class="btn btn-primary topright" (click)="exportIndivExcel()">
+            ดาวน์โหลด Excel
+        </button>
+        <clr-dg-row>
+            <clr-dg-column *ngFor='let entry of (headTable | keys)'>
+                {{entry.key}}
+            </clr-dg-column>
+        </clr-dg-row>
+    </ng-container>
+    <ng-container>
+        <clr-dg-row *ngFor="let ind of indiv  index as i ">
+            <clr-dg-cell *ngFor="let indd of (indiv[i] | keys) ">{{indd.value}}</clr-dg-cell>
+        </clr-dg-row>
+    </ng-container>
+</clr-datagrid>

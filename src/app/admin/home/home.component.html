@@ -1,0 +1,99 @@
+<button class="btn btn-primary" (click)="Open()">เพิ่มข้อมูล</button>
+<clr-datagrid>
+
+    <clr-dg-column [clrDgField]="'username'">username</clr-dg-column>
+    <clr-dg-column [clrDgField]="'password'">password</clr-dg-column>
+    <clr-dg-column [clrDgField]="'fname'">ชื่อ - สกุล</clr-dg-column>
+    <clr-dg-column [clrDgField]="'status'">สถานะ</clr-dg-column>
+    <clr-dg-column [clrDgField]="'level'">ระดับ</clr-dg-column>
+    <clr-dg-row *clrDgItems="let x of allUsername">
+        <clr-dg-action-overflow>
+            <button class="btn btn-primary" (click)="editData(x)">แก้ไขข้อมูล</button>
+            <button class="btn btn-success" (click)="delete(x)">ลบข้อมูล</button>
+        </clr-dg-action-overflow>
+ 
+        <clr-dg-cell>{{x.username}}</clr-dg-cell>
+        <clr-dg-cell>{{x.password}}</clr-dg-cell>
+        <clr-dg-cell>{{x.title}}{{x.fname}} {{x.lname}}</clr-dg-cell>
+        <clr-dg-cell>
+            <ng-template [ngIf]="x.status == 1" [ngIfElse]="notFirst">ใช้งานปกติ</ng-template>
+            <ng-template #notFirst>ยกเลิก</ng-template>
+        </clr-dg-cell>
+        <!-- <clr-dg-cell>{{x.status}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="x.level == 0" [ngIfElse]="notFirstx">หน่วยงาน</ng-template>
+            <ng-template [ngIf]="x.level == 1" [ngIfElse]="notFirstx">ผู้รับผิดชอบระดับอำเภอ</ng-template>
+            <ng-template [ngIf]="x.level == 3" [ngIfElse]="notFirstx">ผู้รับผิดชอบตัวชี้วัด</ng-template>
+            <ng-template [ngIf]="x.level == 4" [ngIfElse]="notFirstx">ผู้ดูแลระบบ</ng-template> 
+            <!-- <ng-template #notFirstx>ไม่ระบุ</ng-template>  -->
+        </clr-dg-cell>
+        <!-- <clr-dg-cell>{{x.level}}</clr-dg-cell> -->
+    </clr-dg-row>
+    <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} คน
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'lg'" [clrModalClosable]="false">
+    <h3 class="modal-title">
+        <clr-icon shape="plus-circle"></clr-icon> แก้ไขข้อมูลผู้ใช้งาน</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="username">username</label>
+                    <input type="text" [(ngModel)]="username" name="username" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="password">password</label>
+                    <input type="text" [(ngModel)]="password" name="password" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">คำนำหน้า</label>
+                    <select [(ngModel)]="title" name="title" id="title">
+                        <option [value]="1">นาย</option>
+                        <option [value]="2">นางสาว</option>
+                        <option [value]="3">นาง</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ชื่อ :</label>
+                    <input type="text" [(ngModel)]="fname" name="fname" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">สกุล :</label>
+                    <input type="text" [(ngModel)]="lname" name="lname" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">หน่วยงาน :</label>
+                    <input type="text" [(ngModel)]="office" name="office" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ตำแหน่ง :</label>
+                    <input type="text" [(ngModel)]="post" name="post" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ระดับ :</label>
+                    <!-- <input type="text" [(ngModel)]="level" name="level" size="level"> -->
+                    <select [(ngModel)]="level" name="level" id="level">
+                        <option *ngFor="let xx of allLevel" [value]="xx.ul_id">{{xx.ul_name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">สถานะ :</label>
+                    <input type="text" [(ngModel)]="status" name="status" size="80">
+                </div>
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="open = false">
+            <clr-icon shape="times"></clr-icon> ยกเลิก
+        </button>
+        <button type="button" class="btn btn-primary" (click)="save()">
+            <clr-icon shape="check"></clr-icon> ตกลง
+        </button>
+    </div>
+</clr-modal>

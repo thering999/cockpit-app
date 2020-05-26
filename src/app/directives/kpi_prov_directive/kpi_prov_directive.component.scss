@@ -1,0 +1,39 @@
+.rowColorlightBlue{
+  background-color:#aeeeee;
+}
+.rowColorwhite{
+  background-color: #ffffff;
+  //color: #55BF3B;
+}
+#titleModal h3,
+#titleModal h4 {
+    display: inline;
+    vertical-align: top;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+}
+.fonts{
+  font-weight: 600;
+  // color: blue;
+}
+.center {
+  text-align: center;
+  // border: 3px solid green;
+}
+.datagrid-cell {
+  word-break: break-all;
+  }
+  .hiddenEl {
+    display: none !important;
+  }
+  .showEl {
+    display: block !important;
+  }
+
+  .disabled { 
+    position : relative; 
+    color: grey;
+   
+}
+

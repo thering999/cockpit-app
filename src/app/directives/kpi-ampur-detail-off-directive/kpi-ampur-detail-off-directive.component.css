@@ -1,0 +1,24 @@
+/* create self progressbar */
+.floatLeft{
+    float:left !important;
+    position: relative !important;
+    overflow: initial !important;
+   
+  }
+  .floatRight{
+    float:right !important;
+  }
+  .boxOutProgress{
+    width: 80%;
+    height: 15px;
+    background-color:grey;
+    border-color:rgb(136, 219, 5);
+  }
+  .boxInProgressRed{  
+    background-color:red;
+    height: 15px; 
+  }
+  .boxInProgressGreen{  
+    background-color:rgb(136, 219, 5);
+    height: 15px; 
+  }

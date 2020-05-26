@@ -1,0 +1,129 @@
+ .borderDiv{
+   border-style: solid;
+   border-color: rgb(238, 230, 227);
+   border-radius: 5px;
+ }
+// .borderTH{
+//   border-style: solid;
+//   border-color: rgb(238, 230, 227);
+// }
+// .condensedlines {
+//   font-size:   10pt;
+//   line-height: 10pt;  /* try also a bit smaller line-height */
+// }
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.borderTH {
+    border-style: solid;
+    border-color: rgb(238, 230, 227);
+}
+
+.condensedlines {
+    font-size: 10pt;
+    line-height: 10pt;
+    /* try also a bit smaller line-height */
+}
+/* override css of clarity datagrid*/
+.datagrid-container {
+    display: block;
+    width: 500px;
+    height: 200px;
+    outline: 1px #f33 solid;
+}
+clr-dg-column {
+    width: 1px; //or any value you want.
+    padding: 0px;
+    border-color: #f33;
+}
+clr-dg-cell {
+    width: 1px; //or any value you want.
+    padding: 0px;
+}
+
+clr-datagridclr-dg-column {
+    width: 1px; //or any value you want.
+    padding: 0px;
+    border-color: #f33;
+}
+
+// .inlineblock {
+//   display: inline-block;
+//   border: 1px solid blue;
+//   background-color: yellow;
+// }
+// fieldset { border:1px solid green }
+// legend {
+// padding: 0.2em 0.5em;
+// border:1px solid green;
+// color:green;
+// font-size:90%;
+// text-align:right;
+// }
+//create block  head table
+
+
+/*set css datatable*/
+table{
+    border-collapse: collapse;
+}
+th,td{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    /*height: 15px;
+    line-height: 20px;*/
+    word-wrap: break-word;
+    border: 1px solid rgb(207, 200, 200);
+    /*overflow: hidden;*/
+    
+  }
+  .hideTD {
+      display: none;
+  }
+
+  tr:nth-child(even) {background-color: #f2f2f2;}
+
+  table.referOut {
+   width: 100%;
+    white-space: nowrap;
+  }
+  table.referOut td {
+    padding: 1px;
+    
+     overflow: hidden;
+     
+     white-space: nowrap;
+     text-overflow: ellipsis;
+  }
+  .referOut td div.whitespac{
+    padding: 1px;
+    white-space: normal;
+     overflow: hidden;
+     word-wrap: break-word;
+     text-overflow: ellipsis;
+  }
+  .referOut td div.send_status{
+    text-align: center;
+    align-items: center;
+  }
+  .referOut th {
+      padding-right: 10px;
+      padding-left: 1px;
+   white-space: normal;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+  }
+  /* Column widths are based on these cells white-space: normal*/
+
+  .rotate {
+  
+    /* Standard */
+    transform: rotate(-90.0deg);
+  }
+  tr { line-height: 14px; }

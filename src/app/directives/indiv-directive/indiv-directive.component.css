@@ -1,0 +1,17 @@
+.page-on-left{
+  text-align: left;
+}
+
+.bottomright {
+  position: absolute;
+  bottom: auto;
+  right: 16px;
+  font-size: 18px;
+}
+
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}

@@ -1,0 +1,323 @@
+<div *ngIf="showContent">
+    <div class="progress progress-fade">
+        <progress max="100" value={{maxProgress}} data-displayval="0%"></progress>
+    </div>
+
+
+
+    <button (click)="tableShow()" [ngClass]="{'btn btn-info btn-sm':tableActive}">
+        <!-- <span  [ngClass]="{'spinner spinner-inline':!tableActive}"></span> -->
+
+        <clr-icon shape="view-list"></clr-icon> ข้อมูลตาราง
+        <span class="badge  badge-light-blue">{{kpi.length}}</span>
+    </button>
+    <button (click)="guagShow()" [ngClass]="{ 'btn btn-info btn-sm': guageActive }">
+        <clr-icon shape="compass"></clr-icon> กราฟ Guage
+        <span class="badge  badge-light-blue">{{kpi.length}}</span>
+    </button>
+    <button (click)="chartShow()" [ngClass]="{ 'btn btn-info btn-sm': chartActive}">
+        <clr-icon shape="bar-chart" class="has-badge"></clr-icon> กราฟ Bar
+        <span class="badge badge-light-blue">{{kpi.length}}</span>
+    </button>
+    <!-- <button class="btn btn-sm" (click)="indShow()" *ngIf="indv"> -->
+    <button *ngIf="indv" [ngClass]="{ 'btn btn-info btn-sm': indivActive}">
+        <clr-icon shape="tablet"></clr-icon> ข้อมูล Individual
+    </button>
+
+    <div [ngClass]="{'hidden': tableActive}">
+        <!--<clr-datagrid [clrDgLoading]="loading" [clrDgSingleSelected]="selected" (clrDgSingleSelectedChange)="selectedChanged($event)">-->
+        <clr-datagrid [clrDgLoading]="loading" class="fonts">
+            <clr-dg-column>รวม {{kpi.length}} ตัวชี้วัด</clr-dg-column>
+            <clr-dg-column>
+                <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs">
+                    <clr-icon shape="organization"></clr-icon> ตัวชี้วัด
+                    <span class="tooltip-content">คลิกดูระดับอำเภอ</span>
+                </a>
+            </clr-dg-column>
+            <clr-dg-column>
+                <clr-icon shape="shield-check"></clr-icon> Baseline
+            </clr-dg-column>
+            <clr-dg-column>
+                <clr-icon shape="success-standard"></clr-icon> เป้าหมาย
+            </clr-dg-column>
+            <clr-dg-column>
+                <clr-icon shape="success-standard" class="is-solid"></clr-icon> ผลงาน
+            </clr-dg-column>
+            <!-- <clr-dg-column>
+                    <clr-icon shape="line-chart"></clr-icon> เป้าหมายร้อยละ/อัตรา
+                </clr-dg-column> -->
+            <clr-dg-column>
+                <clr-icon shape="line-chart"></clr-icon> ผลงานร้อยละ/อัตรา
+            </clr-dg-column>
+            <clr-dg-column>
+                <clr-icon shape="calendar"></clr-icon> Update
+            </clr-dg-column>
+            <clr-dg-column>Template </clr-dg-column>
+
+            <clr-dg-column *ngIf="hospcode">
+                <clr-icon shape="file"></clr-icon> Indiv
+            </clr-dg-column>
+            <clr-dg-column>
+                <!-- <ng-container *clrDgHideableColumn="{hidden:true}"> -->
+                <!-- <ng-container *clrDgHideableColumn="{hidden:true}"> -->
+                <clr-icon shape="bar-chart"></clr-icon> ไตรมาศ
+                <!-- </ng-container> -->
+            </clr-dg-column>
+
+            <clr-dg-placeholder>ตัวชี้วัดนี้ไม่มีรายการ</clr-dg-placeholder>
+
+            <clr-dg-row *clrDgItems="let k of kpi" [ngClass]="{'datagrid-row datagrid-row-flex rowColorwhite': k.kpi_source == 1, 'rowColorlightBlue': k.kpi_source == 2}">
+                <clr-dg-cell>
+                    <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-right">
+                        <div *ngIf="k.kpi_type_data == 0">
+                            <button *ngIf="k.dp_rate >= k.kpi_tar" type="button" class="btn btn-icon btn-success btn-sm" (click)="showTableAmpur(k.kpi_id,k.kpi_name)">
+                                <clr-icon shape="success-standard" class="is-solid"></clr-icon>
+                            </button>
+                            <button *ngIf="k.dp_rate < k.kpi_tar" type="button" class="btn btn-icon btn-danger btn-sm" (click)="showTableAmpur(k.kpi_id,k.kpi_name)">
+                                <clr-icon shape="times-circle" class="is-solid"></clr-icon>
+                            </button>
+                        </div>
+                        <div *ngIf="k.kpi_type_data != 0">
+                            <button *ngIf="k.dp_rate <= k.kpi_tar" type="button" class="btn btn-icon btn-success btn-sm" (click)="showTableAmpur(k.kpi_id,k.kpi_name)">
+                                <clr-icon shape="times-circle" class="is-solid"></clr-icon>
+                            </button>
+                            <button *ngIf="k.dp_rate > k.kpi_tar" type="button" class="btn btn-icon btn-danger btn-sm" (click)="showTableAmpur(k.kpi_id,k.kpi_name)">
+                                <clr-icon shape="success-standard" class="is-solid"></clr-icon>
+                            </button>
+                        </div>
+                        <span class="tooltip-content">คลิกเพื่อดูเปรียบเทียบระดับ อำเภอ</span>
+                    </a>
+
+                </clr-dg-cell>
+                <clr-dg-cell>
+                    <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-right">
+                        {{k.kpi_name}}
+                        <span class="tooltip-content">คลิกที่ปุ่มด้านซ้ายเพื่อดูเปรียบเทียบระดับ อำเภอ</span>
+                    </a>
+                </clr-dg-cell>
+                <clr-dg-cell>{{k.dp_baseline}}</clr-dg-cell>
+                <clr-dg-cell>{{k.dp_pop | number}}</clr-dg-cell>
+                <clr-dg-cell>{{k.dp_data | number}}</clr-dg-cell>
+                <!-- <clr-dg-cell>{{k.kpi_tar}}</clr-dg-cell> -->
+                <clr-dg-cell>{{k.dp_rate}}</clr-dg-cell>
+                <clr-dg-cell>{{k.kpi_update | toThaiDate}}</clr-dg-cell>
+                <clr-dg-cell>
+                    <button class="btn btn-outline-success btn-sm" (click)="uploadFile(k.kpi_id)">
+                        <!-- <button class="btn btn-outline-success btn-sm" (click)="appPdfModal()">showPdfSim -->
+                        <!-- <button class="btn btn-outline-success btn-sm" (click)="showPdfSim(k.kpi_file)"> -->
+                        <!-- ใช้เรียก pdf file ในตัวโปรเจก -->
+                        <clr-icon shape="file"></clr-icon>
+                        เอกสารแนบ
+                    </button>
+                    <!-- <a class="nav-link" href="#" [routerLink]="['./app-pdf']" routerLinkActive="active">
+    
+                            <clr-icon shape="map-marker" class="is-solid"></clr-icon>pdf
+    
+                        </a> -->
+                    <!-- <button type="button" (click)="showPdfTemplate(k.kpi_file)" class="btn btn-icon btn-sm">
+                                <clr-icon shape="file-group" class="is-solid"></clr-icon>
+                            </button> -->
+                </clr-dg-cell>
+                <!--show individaul data if login-->
+                <clr-dg-cell *ngIf="hospcode">
+                    <button type="button" *ngIf="hospcode && k.kpi_indiv" (click)="showIndiv(k.kpi_id)" class="btn btn-icon btn-sm">
+                        <clr-icon shape="file-group"></clr-icon>
+                    </button>
+                    <button class="button" class="btn btn-icon btn-sm" *ngIf=" k.kpi_indiv==''" disabled>
+                        <clr-icon shape="times-circle"></clr-icon>
+                    </button>
+                </clr-dg-cell>
+                <clr-dg-cell>
+                    <button type="button" (click)="showKpiQt(k.kpi_id)" class="btn btn-icon btn-sm" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-left">
+                        <clr-icon shape="view-cards"></clr-icon>
+                        <span class="tooltip-content">คลิกเพื่อดูข้อมูลแบบไตรมาศ</span>
+                    </button>
+                </clr-dg-cell>
+
+                <!--Expand drilldown hear-->
+                <!--<app-kpi-prov-detail-ampur-directive *clrIfExpanded [kpiId]="k.kpi_id" ngProjectAs="clr-dg-row-detail">
+    
+                        </app-kpi-prov-detail-ampur-directive>-->
+                <!--END    Expand drilldown hear-->
+
+            </clr-dg-row>
+
+            <!-- <clr-dg-footer>
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+                    <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+                </clr-dg-footer> -->
+        </clr-datagrid>
+
+    </div>
+    <!--
+        <clr-modal [(clrModalOpen)]="cupModal" [clrModalSize]="'lg'" style="z-index: 99001 !important;">
+            <h3 class="modal-title">เปรียบเทียบระหว่างหน่วยบริการ</h3>
+            <div class="modal-body" *ngIf="compareOff">
+                <div class="row">
+                    <div class="col-lg-12" ng-show="loading" *ngFor="let c of dataChartCompareOff index as i">
+                        <div [ng2-highcharts]="dataChartCompareOff[i]"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="cupModal = false">ปิด</button>
+            </div>
+        </clr-modal>-->
+    <!--/////////DaTa table////////////-->
+
+    <div [ngClass]="{'hidden': guageActive}" data-ng-init="onloadFun()">
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" *ngFor="let c of dataChartGuage index as i">
+                <div class="card" style="overflow: hidden">
+                    <div class="card-block">
+                        <!-- <div class="card-text"> -->
+                        <!--ชาทร์แบบ เกจ-->
+
+                        <div [ng2-highcharts]="dataChartGuage[i]"></div>
+
+                        <!-- </div> -->
+                    </div>
+                    <div class="row card-footer">
+                        <button class="btn btn-outline-primary btn-sm" [ngClass]="{'disabled':kpi[i].kpi_type==0}" (click)="showCompare(kpi[i].kpi_id)">ดูเปรียบเทียบระหว่างอำเภอ</button>
+                        <!-- <button class="btn btn-outline-primary btn-sm">
+                                <clr-icon shape="clipboard" class="has-badge is-solid"></clr-icon>
+                            </button> -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <div [ngClass]="{'hidden': chartActive}">
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" *ngFor="let c of dataChart index as i">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="card-text">
+                            <!--ชาทร์แบบ แท่ง-->
+                            <div [ng2-highcharts]="dataChart[i]"></div>
+                        </div>
+                    </div>
+                    <div class="row card-footer">
+                        <!-- <div class="btn-group btn-outline-primary btn-sm"> -->
+                        <button class="btn btn-outline-primary btn-sm" [ngClass]="{'disabled':kpi[i].kpi_type==0}" (click)="showCompare(kpi[i].kpi_id)">ดูเปรียบเทียบระหว่างอำเภอ</button>
+                        <button class="btn btn-outline-primary btn-sm">
+                            <clr-icon shape="clipboard" class="has-badge is-solid"></clr-icon>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div *ngIf="showPdf">
+    <h2>PDF</h2>
+    <button class="btn btn-outline-success btn-sm" (click)="showContentMain()">
+        <clr-icon shape="file"></clr-icon>
+        กลับ
+    </button>
+    <app-pdf-root [pdfFilename]="pdfFilename"></app-pdf-root>
+</div>
+<!--<clr-tab  *ngIf="hospcode">-->
+<div [ngClass]="{'hidden': indivActive}" *ngIf="indv" id="indiv_data">
+
+    <div>
+        <app-indiv-directive [kpiIdSend]="kpi_id"></app-indiv-directive>
+    </div>
+
+</div>
+
+<!--//////////////Modal////////////-->
+<clr-modal [(clrModalOpen)]="tableAmpurModal" [clrModalSize]="'xl'" *ngIf="tableAmpurModal" [clrModalClosable]="false">
+    <span class="modal-title" id="titleModal">
+        <h3>ข้อมูลเปรียบเทียบระดับอำเภอ</h3>
+        <h4>
+            ตัวชี้วัด
+            <div [innerHTML]="kpiNameModal"></div>
+        </h4>
+    </span>
+    <div class="modal-body">
+        <div class="row" class="center">
+            <div id="my-container">
+                <app-kpi-prov-detail-ampur-directive [kpiId]="send_kpi_id">
+                </app-kpi-prov-detail-ampur-directive>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="tableAmpurModal = false">ปิด</button>
+    </div>
+</clr-modal>
+
+<!--//////////////Modal pdf////////////-->
+<app-modal-file-upload #modalUpload></app-modal-file-upload>
+<!--//////////////Modal Quater////////////-->
+<clr-modal [(clrModalOpen)]="tableQuaterModal" [clrModalSize]="'xl'" *ngIf="tableQuaterModal">
+
+    <div class="modal-body">
+        <div class="row" class="center">
+            <div id="my-container">
+                <kpi_prov_qt_directive [kpiId]="send_kpi_id" [kpiAarray]="kpiAarraySend">
+
+                </kpi_prov_qt_directive>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="tableQuaterModal = false">ปิด</button>
+    </div>
+</clr-modal>
+<!--//////////////Modal graph////////////-->
+<clr-modal [(clrModalOpen)]="compareModal" [clrModalSize]="'xl'" style="z-index: 99000 !important;">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-12" ng-show="loading" *ngFor="let c of dataChartCompare index as i">
+                <div [ng2-highcharts]="dataChartCompare[i]"></div>
+                <div [ng2-highcharts]="dataChartCompareOff[i]"></div>
+            </div>
+        </div>
+
+    </div>
+
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="pdfModal" [clrModalSize]="'xl'">
+    <h3 class="modal-title">PDF</h3>
+    <div class="modal-body">
+        <div class="row">
+            <div id="my-container">
+                <wm-pdf-viewer [options]="options" #viewer></wm-pdf-viewer>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="pdfModal = false">Cancel</button>
+    </div>
+</clr-modal>
+<clr-modal [(clrModalOpen)]="AppPdfModal" [clrModalSize]="'xl'">
+    <h3 class="modal-title">App-PDF</h3>
+    <div class="modal-body">
+        <div class="row">
+            <div id="my-container">
+                <!-- <app-pdf-root></app-pdf-root> -->
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="pdfModal = false">Cancel</button>
+    </div>
+</clr-modal>

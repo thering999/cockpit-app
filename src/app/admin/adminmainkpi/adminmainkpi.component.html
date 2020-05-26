@@ -1,0 +1,105 @@
+<p>กลุ่มหลักตัวชี้วัด</p>
+
+<!-- สร้างหัวตารางแบบ html ครับ -->
+<button class="btn btn-primary" (click)="open = true">
+    <clr-icon shape="plus-circle"></clr-icon> เพิ่มกลุ่มหลักตัวชี้วัด
+</button>
+<clr-datagrid>
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ลำดับ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อกลุ่ม(แบบย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ชื่อกลุ่ม(แบบเต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="success-standard"></clr-icon> ผู้รับผิดชอบ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="success-standard" class="is-solid"></clr-icon> สถานะ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> Action</clr-dg-column>
+
+
+    <!-- ดึงข้อมูลจาก stg_group มาแสดง -->
+
+    <clr-dg-row *clrDgItems="let l of allAdminMainKpi">
+        <clr-dg-action-overflow>
+            <button class="action-item" (click)="showEdit(l)">แก้ไขข้อมูล</button>
+            <button class="action-item" (click)="deleteData(l)">ลบข้อมูล</button>
+        </clr-dg-action-overflow>
+
+        <!-- <clr-dg-row *clrDgItems="let l of allAdminMainKpi"> -->
+        <clr-dg-cell>{{l.stg_group_id}}</clr-dg-cell>
+        <clr-dg-cell>{{l.stg_group_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.stg_group_detail}}</clr-dg-cell>
+        <clr-dg-cell>{{l.sth_group_own}}</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.stg_group_status}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.stg_group_status == 1" [ngIfElse]="notFirst">เปิด</ng-template>
+            <ng-template #notFirst>ปิด</ng-template>
+        </clr-dg-cell>
+
+        <!-- <clr-dg-cell></clr-dg-cell> -->
+        <clr-dg-cell>
+            <div class="btn-group btn-primary">
+                <button class="btn btn-primary btn-icon" (click)="showEdit(l)">
+                    <clr-icon shape="edit"></clr-icon>
+                </button>
+                <button class="btn btn-danger btn-icon" (click)="deleteData(l)">
+                    <clr-icon shape="trash"></clr-icon>
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'lg'" [clrModalClosable]="false">
+    <h3 class="modal-title">
+        <clr-icon shape="plus-circle"></clr-icon> เพิ่มกลุ่มหลักตัวชี้วัด</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <!-- <label>ตัวชี้วัด</label> -->
+                <!-- <div class="form-group">
+                    <label for="aForm_1">รหัสตัวชี้วัด</label>
+                    <input type="text" [(ngModel)]="stg_group_id" name="stg_group_id" placeholder="ระบุรหัสตัวชี้วัด" size="80">
+                </div> -->
+                <div class="form-group">
+                    <label for="aForm_1">ชื่อกลุ่ม(แบบย่อ)</label>
+                    <input type="text" [(ngModel)]="stg_group_name" name="stg_group_name" placeholder="ระบุชื่อกลุ่ม(แบบย่อ)" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_2">ชื่อกลุ่ม(แบบเต็ม)</label>
+                    <textarea id="aForm_2" rows="2" [(ngModel)]="stg_group_detail" name="stg_group_detail" placeholder="ระบุชื่อกลุ่ม(แบบเต็ม)"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_3">ผู้รับผิดชอบ</label>
+                    <!-- <input type="text" [(ngModel)]="sth_group_own" name="sth_group_own" placeholder="ระบุผู้รับผิดชอบ" size="80"> -->
+                    <select [(ngModel)]="sth_group_own" name="sth_group_own" id="sth_group_own">
+                        <option *ngFor="let Sth of alllookupusers" [value]="Sth.username">{{Sth.fname}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_4">สถานะ</label>
+                    <!-- <input type="text" [(ngModel)]="stg_group_status" name="stg_group_status" placeholder="ระบุสถานะ" size="80"> -->
+                    <!-- <select [(ngModel)]="stg_group_status" name="stg_group_status" id="stg_group_status"> -->
+                        <!-- <option *ngFor="let l of allAdminMainKpi" [value]="l.stg_group_status">{{l.stg_group_status}}</option> -->
+                    <!-- </select> -->
+
+                    <select  ng-model="stg_group_status" ng-init="l.stg_group_status=1">
+                        <!-- <option value="--Select--">--Select--</option> -->
+                        <option value="1">เปิด</option>
+                        <option value="0">ปิด</option>
+                    </select>
+
+                </div>
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="open = false">
+            <clr-icon shape="times"></clr-icon> ยกเลิก</button>
+        <button type="button" class="btn btn-primary" (click)="saveData()">
+            <clr-icon shape="check"></clr-icon> ตกลง</button>
+    </div>
+</clr-modal>

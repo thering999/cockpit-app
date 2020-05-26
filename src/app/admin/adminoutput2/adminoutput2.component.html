@@ -1,0 +1,87 @@
+<p>
+    ฟอร์มบันทึกพร้อมแล้วจร้า
+</p>
+<clr-datagrid [clrDgLoading]="loading">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="success-standard"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="success-standard" class="is-solid"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+
+
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> Action</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput">
+        <clr-dg-action-overflow>
+            <button class="action-item" (click)="showEdit(l)">แก้ไขข้อมูล</button>
+            <button class="action-item" (click)="deleteData(l)">ลบข้อมูล</button>
+        </clr-dg-action-overflow>
+
+        <clr-dg-row *clrDgItems="let l of allAdminOutput">
+            <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_detail}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+            <clr-dg-cell></clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_status}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+            <clr-dg-cell></clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+            <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+        </clr-dg-footer>
+</clr-datagrid>
+
+<p>
+    กลุ่มตัวชี้วัด : ตัวชี้วัดกระทรวง ปี 2560 : Governance Excellence
+</p>
+<clr-datagrid [clrDgLoading]="loading">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="success-standard"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="success-standard" class="is-solid"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> Action</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput2">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell></clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_status}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell></clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>

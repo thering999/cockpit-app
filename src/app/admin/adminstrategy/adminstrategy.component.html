@@ -1,0 +1,166 @@
+<p>
+    <clr-dropdown [clrCloseMenuOnItemClick]="false">
+        <!-- <clr-dropdown [clrCloseMenuOnItemClick]="false"> -->
+        <button class="btn btn-success" clrDropdownTrigger>
+            <clr-icon shape="map-marker" class="is-solid"></clr-icon> กลุ่มตัวชี้วัด {{stg_group_name}}
+            <!--  -->
+        </button>
+        <clr-dropdown-menu *clrIfOpen>
+            <li class="btn btn-link" *ngFor="let s of getStggroup">
+                <a>
+                    <button (click)="ShowStg(s.stg_group_id)" clrDropdownTrigger>{{s.stg_group_name}} </button>
+                </a>
+                <!-- ดึงข้อมูล ให้แสดงตาม stg_group_id -->
+            </li>
+        </clr-dropdown-menu>
+    </clr-dropdown>
+    <button class="btn btn-primary" (click)="open = true">
+        <clr-icon shape="plus-circle"></clr-icon> เพิ่มข้อมูลตัวชี้วัด
+    </button>
+    กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด
+</p>
+
+
+
+
+
+
+
+
+<!-- <button class="btn btn-primary" (click)="open = true">
+        <clr-icon shape="plus-circle"></clr-icon> เพิ่มข้อมูลตัวชี้วัด
+    </button> -->
+<div>
+    <clr-datagrid [clrDgLoading]="loading">
+        <clr-dg-action-bar>
+        </clr-dg-action-bar>
+        <clr-dg-column [clrDgField]="'stg_id'">
+            <clr-icon shape="view-list"></clr-icon> ลำดับ
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'stg_name'">
+            <clr-icon shape="pin"></clr-icon> ชื่อ(แบบย่อ)
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'stg_detail'">
+            <clr-icon shape="pin"></clr-icon> ชื่อ(แบบแบบเต็ม)
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'stg_own'">
+            <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'stg_status'">
+            <clr-icon shape="unknown-status"></clr-icon> สถานะ
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'stg_own'">Action</clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let l of allstg ;">
+            <clr-dg-action-overflow>
+                <button class="action-item" (click)="showEdit(l)">แก้ไขข้อมูล</button>
+                <button class="action-item" (click)="deleteData(l)">ลบข้อมูล</button>
+            </clr-dg-action-overflow>
+            <clr-dg-cell>{{l.stg_id}}</clr-dg-cell>
+            <clr-dg-cell>{{l.stg_name}}</clr-dg-cell>
+            <clr-dg-cell>{{l.stg_detail}}</clr-dg-cell>
+            <clr-dg-cell>{{l.stg_own}}</clr-dg-cell>
+
+            <clr-dg-cell>
+                <ng-template [ngIf]="l.stg_status == 1" [ngIfElse]="notFirst">เปิด</ng-template>
+                <ng-template #notFirst>ปิด</ng-template>
+            </clr-dg-cell>
+
+            <!-- <clr-dg-cell>{{l.stg_status}}</clr-dg-cell> -->
+
+            <clr-dg-cell>
+                <div class="btn-group btn-primary">
+                    <button class="btn btn-primary btn-icon" (click)="showEdit(l)">
+                        <!-- showEdit(l) เอาตาม let l of allstg -->
+                        <clr-icon shape="edit"></clr-icon>
+                    </button>
+                    <button class="btn btn-danger btn-icon" (click)="deleteData(l)">
+                        <!-- deleteData(l) เอาตาม let l of allstg -->
+                        <clr-icon shape="trash"></clr-icon>
+                    </button>
+                </div>
+            </clr-dg-cell>
+        </clr-dg-row>
+        <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}
+            <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+        </clr-dg-footer>
+    </clr-datagrid>
+
+</div>
+<!-- <clr-dg-footer>{{kpi.length}} kpi</clr-dg-footer> -->
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'lg'">
+    <h3 class="modal-title">
+        <clr-icon shape="plus-circle"></clr-icon> เพิ่มกลุ่มตัวชี้วัด
+    </h3>
+    <div class="modal-body">
+
+        <form>
+            <section class="form-block">
+                <label>ตัวชี้วัด</label>
+                <div class="form-group">
+                    <label for="aForm_1">รหัสกลุ่มตัวชี้วัด</label>
+                    <input type="text" [(ngModel)]="adminstg_id" name="adminstg_id" placeholder="ระบุรหัสตัวหมวดชี้วัด" size="80">
+                </div>
+
+                <div class="form-group">
+                    <label for="aForm_1">รหัสกลุ่มตัวชี้วัด</label>
+                    <div class="select" placeholder="ระบุรหัสหมวดตัวชี้วัด">
+                        <select [(ngModel)]="adminstg_group_id" name="adminstg_group_id" id="adminstg_group_id">
+                            <option *ngFor="let Stg of getStggroup" [value]="Stg.stg_group_id">{{Stg.stg_group_name}}</option>
+                            <!-- นำค่าจาก let Stg of getStggroup มาให้เลือก -->
+                        </select>
+                    </div>
+                </div>
+
+                <!--
+                    <div class="form-group">
+                        <label for="aForm_1">รหัสกลุ่มตัวชี้วัด</label>
+                        <input type="text" [(ngModel)]="adminstg_group_id" name="adminstg_group_id" placeholder="ระบุรหัสกลุ่มตัวชี้วัด" size="80">
+                    </div> -->
+                <div class="form-group">
+                    <label for="aForm_4">ชื่อกลุ่มตัวชี้วัด</label>
+                    <textarea id="aForm_4" rows="2" [(ngModel)]="adminstg_name" name="adminstg_name" placeholder="ระบุชื่อม(ย่อ"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_4">รายละเอียดของกลุ่มตัวชี้วัด</label>
+                    <textarea id="aForm_4" rows="4" [(ngModel)]="adminstg_detail" name="adminstg_detail" placeholder="ระบุชื่อชื่อม(เต็ม)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="aForm_1">ผู้รับผิดชอบกลุ่มตัวชี้วัด</label>
+                    <div class="select" placeholder="ระบุผู้รับผิดชอบโครงการ">
+                        <select [(ngModel)]="adminstg_own" name="adminstg_own" id="adminstg_own">
+                            <option *ngFor="let u of alluser" [value]="u.username">{{u.fname}}</option>
+                            <!-- นำค่าจาก let user of alluser มาให้เลือก -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label for="aForm_1">ผู้รับผิดชอบโครงการ</label>
+                    <input type="text" [(ngModel)]="adminstg_own" name="adminstg_own" placeholder="ระบุระดับบันทึกข้อมูล" size="80">
+                </div> -->
+                <div class="form-group">
+                    <label for="aForm_1">สถานะของกลุ่มตัวชี้วัด</label>
+                    <!-- <input type="text" [(ngModel)]="stg_group_status" name="stg_group_status" placeholder="ระบุสถานะ" size="80"> -->
+                    <select [(ngModel)]="adminstg_status" name="adminstg_status" id="adminstg_status">
+                        <option *ngFor="let Status of alllookupstatus" [value]="Status.id">{{Status.name_th}}</option>
+                    </select>
+                </div>
+
+
+                <!-- <div class="form-group">
+                    <label for="aForm_1">สถานะของโครงการ</label>
+                    <input type="text" [(ngModel)]="adminstg_status" name="adminstg_status" placeholder="ระบุค่ามากสุด" size="80">
+                </div> -->
+
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="open = false">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" (click)="saveData()">ตกลง</button>
+    </div>
+</clr-modal>

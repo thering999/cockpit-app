@@ -1,0 +1,117 @@
+#ampur_list {
+
+  height: 300px;
+  overflow: scroll;
+}
+.subnav-1{
+  background-color: #f5f5f5;
+  color: #009587;
+  padding-left: 30px;
+  font-size: 14px;
+}
+.position-right{
+  vertical-align: right;
+}
+.menuBackgroudActive{
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 5px;
+  background-color: #3f51b5;
+  border-bottom: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.menuBackgroud{
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 5px;
+  color: #3f51b5;
+  background-color: #ffffff;
+  border-bottom: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.header-10{
+  background-color: #f5f5f5;
+  color: #009587;
+  padding-left: 10px;
+  font-size: 14px;
+}
+.searchBar {
+    border: 1px solid green;
+    padding: 10px;
+    border-radius: 25px;
+     font-family: 'Times New Roman', Times, serif;
+    height: 20px;
+  color: blue;
+  margin: 0;
+}
+.searchRight{
+	text-align:right;
+	float: right;
+}
+  .hidden {
+    display: none !important;
+  }
+    .visible {
+    display: block !important;
+  }
+  
+
+/*set css datatable*/
+table{
+    border-collapse: collapse;
+}
+th,td{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    /*height: 15px;*/
+    line-height: 20px;
+   // word-wrap: break-word;
+    border: 1px solid rgb(207, 200, 200);
+    /*overflow: hidden;*/
+    
+  }
+  .hideTD {
+      display: none;
+  }
+
+  tr:nth-child(even) {background-color: #f2f2f2;}
+
+  table.dts {
+   width: 100%;
+    white-space: nowrap;
+  }
+  table.dts td {
+    padding: 1px;
+    
+     overflow: hidden;
+     
+     white-space: nowrap;
+     text-overflow: ellipsis;
+  }
+  .dts td div.whitespac{
+    padding: 1px;
+    white-space: normal;
+     overflow: hidden;
+     word-wrap: break-word;
+     text-overflow: ellipsis;
+  }
+  .dts td div.send_status{
+    text-align: center;
+    align-items: center;
+  }
+  .dts th {
+      padding-right: 10px;
+      padding-left: 1px;
+   white-space: normal;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+  }
+  .rotate {
+  
+    /* Standard */
+    transform: rotate(90.0deg);
+  }

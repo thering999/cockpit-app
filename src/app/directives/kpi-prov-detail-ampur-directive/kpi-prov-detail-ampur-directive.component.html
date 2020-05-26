@@ -1,0 +1,78 @@
+<div class="dg-wrapper">
+    <clr-datagrid [clrDgLoading]="loading" class="datagrid-compact dg-cell-bg">
+        <!-- <clr-dg-column></clr-dg-column> -->
+        <clr-dg-column>
+            <clr-icon shape="cluster"></clr-icon> อำเภอ</clr-dg-column>
+        <clr-dg-column>
+            <clr-icon shape="success-standard"></clr-icon> เป้าหมาย</clr-dg-column>
+        <clr-dg-column>
+            <clr-icon shape="success-standard" class="is-solid"></clr-icon> ผลงาน</clr-dg-column>
+        <!-- <clr-dg-column>
+            <clr-icon shape="line-chart"></clr-icon> ร้อยละ
+        </clr-dg-column> -->
+        <clr-dg-column>ร้อยละ</clr-dg-column>
+        <!-- <clr-dg-column> </clr-dg-column>
+    <clr-dg-column> </clr-dg-column>
+    <clr-dg-column> </clr-dg-column> -->
+        <clr-dg-placeholder>ไม่พบข้อมูลเปรียบเทียบระดับอำเภอ</clr-dg-placeholder>
+        <clr-dg-row *clrDgItems="let k of kpiDetail">
+            <!--<clr-dg-cell></clr-dg-cell>
+       <clr-dg-action-overflow>
+        <button class="action-item" (click)="onEdit(user)">Edit</button>
+      </clr-dg-action-overflow> -->
+            <clr-dg-cell>{{k.amphurname}}</clr-dg-cell>
+            <clr-dg-cell>{{k.da_pop}}</clr-dg-cell>
+            <clr-dg-cell>{{k.da_data}}</clr-dg-cell>
+            <!-- <clr-dg-cell>{{k.da_rate}}</clr-dg-cell> -->
+            <clr-dg-cell>
+                <!-- <span class="rateProgress">
+                    <progress max="100" value="{{k.da_rate}}" data-displayval="0%"></progress>
+                </span>
+                <span class="clearBoth">{{k.da_rate}}%</span> -->
+                <span class="boxOutProgress floatLeft">
+                    <div *ngIf="k.kpi_type_data == 0">
+                        <div *ngIf="k.da_rate >= k.kpi_tar" class="boxInProgressGreen" [ngStyle]="{'width':k.da_rate+'%'}"></div>
+                        <div *ngIf="k.da_rate < k.kpi_tar" class="boxInProgressRed" [ngStyle]="{'width':k.da_rate+'%'}"></div>
+                    </div>
+                    <div *ngIf="k.kpi_type_data != 0">
+                            <div *ngIf="k.da_rate <= k.kpi_tar" class="boxInProgressGreen" [ngStyle]="{'width':k.da_rate+'%'}"></div>
+                            <div *ngIf="k.da_rate > k.kpi_tar" class="boxInProgressRed" [ngStyle]="{'width':k.da_rate+'%'}"></div>
+                        </div>
+                    </span>
+                <span class="floatRight">{{k.da_rate}}%</span>
+
+            </clr-dg-cell>
+            <!-- <clr-dg-cell></clr-dg-cell>
+      <clr-dg-cell></clr-dg-cell>
+      <clr-dg-cell></clr-dg-cell> -->
+            <app-kpi-ampur-detail-off-directive *clrIfExpanded [kpiId]="k.da_kpi" [ampId]="k.da_amp" ngProjectAs="clr-dg-row-detail">
+            </app-kpi-ampur-detail-off-directive>
+        </clr-dg-row>
+        <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} อำเภอ
+            <clr-dg-pagination #pagination [clrDgTotalItems]="total"></clr-dg-pagination>
+            <!-- <clr-dg-pagination #pagination [clrDgPageSize]="15" [clrDgTotalItems]="100"></clr-dg-pagination> -->
+        </clr-dg-footer>
+    </clr-datagrid>
+</div>
+<!--//////////////Modal////////////-->
+<clr-modal [(clrModalOpen)]="tableAmpurModal" [clrModalSize]="'xl'" *ngIf="tableAmpurModal" [clrModalClosable]="false">
+    <span class="modal-title" id="titleModal">
+        <h3>ข้อมูลเปรียบเทียบระดับสถานบริการ</h3>
+        <h4>
+            ตัวชี้วัด
+            <div [innerHTML]="kpiNameModal"></div>
+        </h4>
+    </span>
+    <div class="modal-body">
+        <div class="row" class="center">
+            <div id="my-container">
+                <app-kpi-prov-detail-ampur-directive [kpiId]="send_kpi_id">
+                </app-kpi-prov-detail-ampur-directive>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="tableAmpurModal = false">ปิด</button>
+    </div>
+</clr-modal>

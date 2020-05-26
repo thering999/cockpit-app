@@ -1,0 +1,70 @@
+<clr-main-container>
+    <clr-header class="header-5">
+        <div class="branding">
+            <a href="./admin/adminkpi" class="nav-link" *ngIf="userLevel == 4">
+                <clr-icon shape="dashboard" class="has-badge"></clr-icon>
+                <span class="title">ระบบข้อมูลตัวชี้วัดสำนักงานสาธารณสุขจังหวัดอุบลราชธานี ปีงบประมาณ 2561</span>
+            </a>
+            <a href="./admin/adminoutput" class="nav-link" *ngIf="userLevel == 3">
+                <clr-icon shape="dashboard" class="has-badge"></clr-icon>
+                <span class="title">ระบบข้อมูลตัวชี้วัดสำนักงานสาธารณสุขจังหวัดอุบลราชธานี ปีงบประมาณ 2561</span>
+            </a>
+        </div>
+        <div class="header-actions">
+            <div class="branding">
+                <span class="title">{{userFname}} | &nbsp;&nbsp;
+                    <a class="nav-link" href="#" (click)="logLoOut()">
+                        <b>
+                            <!-- <clr-icon shape="logout"></clr-icon> -->LOGOUT
+                        </b>
+                    </a>
+                </span>
+            </div>
+        </div>
+
+    </clr-header>
+    <nav class="subnav" [clr-nav-level]="1">
+        <ul class="nav">
+            <clr-dropdown *ngIf="userLevel == 4">
+                <button class="nav-text" clrDropdownTrigger>
+                    <a class="nav-link" href="#" [routerLink]="['./adminmainkpi']" routerLinkActive="active" clrDropdownItem>
+                        <clr-icon shape="storage"></clr-icon> กลุ่มหลักตัวชี้วัด</a>
+                </button>
+            </clr-dropdown>
+            <clr-dropdown *ngIf="userLevel == 4">
+                <button class="nav-text" clrDropdownTrigger>
+                    <a class="nav-link" href="#" [routerLink]="['./admstrategy']" routerLinkActive="active" clrDropdownItem>
+                        <clr-icon shape="storage"></clr-icon> กลุ่มตัวชี้วัด</a>
+                </button>
+            </clr-dropdown>
+            <clr-dropdown *ngIf="userLevel == 4">
+                <button class="nav-text" clrDropdownTrigger>
+                    <a class="nav-link" href="#" [routerLink]="['./adminkpi']" routerLinkActive="active" clrDropdownItem>
+                        <clr-icon shape="storage"></clr-icon> ตัวชี้วัด</a>
+                </button>
+            </clr-dropdown>
+            <clr-dropdown *ngIf="userLevel == 3 || userLevel == 4">
+                <button class="nav-text" clrDropdownTrigger>
+                    <a class="nav-link" href="#" [routerLink]="['./adminoutput']" routerLinkActive="active" clrDropdownItem>
+                        <clr-icon shape="plus-circle"></clr-icon> บันทึกผลงาน</a>
+                </button>
+            </clr-dropdown>
+            <clr-dropdown *ngIf="userLevel == 4">
+                <button class="nav-text" clrDropdownTrigger>
+                    <a class="nav-link" href="#" [routerLink]="['./home']" routerLinkActive="active" clrDropdownItem>
+                        <clr-icon shape="users"></clr-icon> ผู้ใช้งาน</a>
+                </button>
+            </clr-dropdown>
+
+
+        </ul>
+    </nav>
+
+    <div class="content-container">
+
+        <div class="content-area">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</clr-main-container>

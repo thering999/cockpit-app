@@ -1,0 +1,263 @@
+<p>จัดการระบบ/ตัวชี้วัด</p>
+<button class="btn btn-primary" (click)="open = true">
+    <clr-icon shape="plus-circle"></clr-icon> เพิ่มข้อมูลตัวชี้วัด</button>
+<div>
+    <clr-datagrid>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                รหัสตัวชี้วัด
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                รหัสโครงการตัวชี้วัด
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'kpi_name'">ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+        <clr-dg-column [clrDgField]="'kpi_detail'">ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+        <clr-dg-column [clrDgField]="'kpi_type'">ระดับบันทึกข้อมูล</clr-dg-column>
+        <clr-dg-column>ค่ามากสุด</clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                สูตรคำนวณตัวชี้วัด
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column>เกณฑ์</clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                เกณฑ์เป้าหมาย
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                ผู้รับผิดชอบตัวชี้วัด
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'kpi_type_data'">ค่าที่ดี </clr-dg-column>
+        <clr-dg-column [clrDgField]="'kpi_status'">สถานะ</clr-dg-column>
+        <clr-dg-column>KPI Template</clr-dg-column>
+        <!-- <clr-dg-column>วันที่บันทึก/ประมวลผล</clr-dg-column> -->
+        <clr-dg-column>อธิบายสคริป </clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                วิธิจัดเก็บข้อมูล
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column [clrDgField]="'owner'">ผู้รับผิดชอบ</clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                ชื่อตารางข้อมูลรายบุคคล
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                ลิ้งหน้ารายงาน
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column>
+            <ng-container *clrDgHideableColumn="{hidden:true}">
+                จังหวัดที่รับผิดชอบตัวชี้วัด
+            </ng-container>
+        </clr-dg-column>
+        <clr-dg-column>
+            <clr-icon shape="cog"></clr-icon> Action</clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let l of allAdminKpi;let status of alllookupstatus">
+            <clr-dg-action-overflow>
+                <button class="action-item" (click)="showEdit(l)">แก้ไขข้อมูล</button>
+                <button class="action-item" (click)="deleteData(l)">ลบข้อมูล</button>
+            </clr-dg-action-overflow>
+            <clr-dg-cell>{{l.kpi_id}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_stg_id}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_detail}}</clr-dg-cell>
+
+            <clr-dg-cell>
+                <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+                <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+                <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+                <ng-template #notFirst1>อื่นๆ</ng-template>
+
+            </clr-dg-cell>
+
+            <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_cal}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_type_data}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+
+            <clr-dg-cell>
+                <ng-template [ngIf]="l.kpi_type_data == 0" [ngIfElse]="notFirst2">มากดี</ng-template>
+                <ng-template [ngIf]="l.kpi_type_data == 1" [ngIfElse]="notFirst2">น้อยดี</ng-template>
+                <ng-template #notFirst2>อื่นๆ</ng-template>
+
+            </clr-dg-cell>
+
+            <clr-dg-cell>
+                <ng-template [ngIf]="l.kpi_status == 1" [ngIfElse]="notFirst3">เปิด</ng-template>
+                <ng-template #notFirst3>ปิด</ng-template>
+            </clr-dg-cell>
+
+            <clr-dg-cell>{{l.kpi_file}}</clr-dg-cell>
+            <!-- <clr-dg-cell>{{l.kpi_update}}</clr-dg-cell> -->
+            <clr-dg-cell>{{l.kpi_file2}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_source}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_order}}</clr-dg-cell>
+            <!-- <clr-dg-cell>{{l.owner}}</clr-dg-cell> -->
+
+            <clr-dg-cell>{{l.kpi_indiv}}</clr-dg-cell>
+            <clr-dg-cell>{{l.kpi_report}}</clr-dg-cell>
+            <!-- <clr-dg-cell>{{l.owner}}</clr-dg-cell> -->
+            <clr-dg-cell>
+                <div class="btn-group btn-primary">
+                    <button class="btn btn-primary btn-icon" (click)="showEdit(l)">
+                        <clr-icon shape="edit"></clr-icon>
+                    </button>
+                    <button class="btn btn-danger btn-icon" (click)="deleteData(l)">
+                        <clr-icon shape="trash"></clr-icon>
+                    </button>
+                </div>
+            </clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>
+            {{allAdminKpi.length}} ตัวชี้วัด {{pageWait.firstItem + 1}} - {{pageWait.lastItem + 1}} of {{pageWait.totalItems}} รายการ
+            <clr-dg-pagination #pageWait [clrDgPageSize]="10"></clr-dg-pagination>
+        </clr-dg-footer>
+    </clr-datagrid>
+</div>
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'lg'" [clrModalClosable]="false">
+    <h3 class="modal-title">
+        <clr-icon shape="plus-circle"></clr-icon> เพิ่มตัวชี้วัด</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="aForm_1">รหัสตัวชี้วัด</label>
+                    <input type="text" [(ngModel)]="adminkpi_id" name="adminkpi_id" placeholder="ระบุรหัสตัวชี้วัด" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">รหัสโครงการตัวชี้วัด</label>
+                    <div class="select" placeholder="ระบุรหัสโครงการตัวชี้วัด">
+                        <select [(ngModel)]="adminkpi_stg_id" name="adminkpi_stg_id" id="adminkpi_stg_id">
+                            <option *ngFor="let Stg of allstg" [value]="Stg.stg_id">{{Stg.stg_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_4">ชื่อตัวชี้วัด</label>
+                    <textarea id="aForm_4" rows="2" [(ngModel)]="adminkpi_name" name="adminkpi_name" placeholder="ระบุชื่อตัวชี้วัด"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_4">รายละเอียดของตัวชี้วัด</label>
+                    <textarea id="aForm_4" rows="5" [(ngModel)]="adminkpi_detail" name="adminkpi_detail" placeholder="ระบุรายละเอียดของตัวชี้วัด"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ระดับการแสดงข้อมูล</label>
+                    <div class="select" placeholder="ระบุระดับการแสดงข้อมูล">
+                        <select [(ngModel)]="adminkpi_type" name="adminkpi_type" id="adminkpi_type">
+                            <option *ngFor="let type of alllookuptype" [value]="type.id">{{type.name_th}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ค่าสำหรับจัดหน้าปัดเกจ</label>
+                    <input type="text" [(ngModel)]="adminkpi_scale" name="adminkpi_scale" placeholder="ระบุค่าสำหรับจัดหน้าปัดเกจ" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">สูตรคำนวณตัวชี้วัด</label>
+                    <div class="select" placeholder="สูตรคำนวณตัวชี้วัด">
+                        <select [(ngModel)]="adminkpi_cal" name="adminkpi_cal" id="adminkpi_cal">
+                            <option *ngFor="let cal of alllookupcal" [value]="cal.cal_id">{{cal.cal_name}}</option>
+                        </select>
+                    </div>
+                    <!-- <input type="text" [(ngModel)]="adminkpi_cal" name="adminkpi_cal" placeholder="ระบุสูตรคำนวณตัวชี้วัด" size="80"> -->
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ค่าเป้าหมายตัวชี้วัด</label>
+                    <input type="text" [(ngModel)]="adminkpi_tar" name="adminkpi_tar" placeholder="ระบุค่าเป้าหมายตัวชี้วัด" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">เกณฑ์เป้าหมาย</label>
+                    <div class="select" placeholder="เกณฑ์เป้าหมาย">
+                        <select [(ngModel)]="adminkpi_type_data" name="adminkpi_type_data" id="adminkpi_type_data">
+                            <option *ngFor="let typedata of alllookuptypedata" [value]="typedata.id">{{typedata.name_th}}</option>
+                        </select>
+                    </div>
+                    <!-- <input type="text" [(ngModel)]="adminkpi_type_data" name="adminkpi_type_data" placeholder="ระบุเกณฑ์เป้าหมาย" size="80"> -->
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ผู้รับผิดชอบตัวชี้วัด</label>
+                    <div class="select" placeholder="ระบุผู้รับผิดชอบตัวชี้วัด">
+                        <select [(ngModel)]="adminkpi_own" name="adminkpi_own" id="adminkpi_own">
+                            <option *ngFor="let users of alllookupusers" [value]="users.username">{{users.fname}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="othertoggle">สถานะการแสดงผล</label>
+                    <div class="select" placeholder="สถานะการแสดงผล">
+                        <select [(ngModel)]="adminkpi_status" name="adminkpi_status" id="adminkpi_status">
+                            <option *ngFor="let status of alllookupstatus" [value]="status.id">{{status.name_th}}</option>
+                        </select>
+                    </div>
+
+
+
+
+
+                    <!-- <div class="toggle-switch">
+                        <input type="checkbox" id="othertoggle" [(ngModel)]="adminkpi_status" name="adminkpi_status">
+                        <label for="othertoggle">status</label>
+                    </div> -->
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">วันที่บันทึก/ประมวลผล</label>
+                    <input type="text" [(ngModel)]="adminkpi_update" name="adminkpi_update" placeholder="ระบุวันที่บันทึก/ประมวลผล" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">วิธิจัดเก็บข้อมูล</label>
+                    <div class="select" placeholder="วิธิจัดเก็บข้อมูล">
+                        <select [(ngModel)]="adminkpi_source" name="adminkpi_source" id="adminkpi_source">
+                            <option *ngFor="let source of alllookupsource" [value]="source.id">{{source.name_th}}</option>
+                        </select>
+                    </div>
+                    <!-- <input type="text" [(ngModel)]="adminkpi_source" name="adminkpi_source" placeholder="ระบุวิธิจัดเก็บข้อมูล" size="80"> -->
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ลำดับการแสดงผลตัวชี้วัด</label>
+                    <input type="text" [(ngModel)]="adminkpi_order" name="adminkpi_order" placeholder="ระบุลำดับการแสดงผลตัวชี้วัด" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ชื่อตารางข้อมูลรายบุคคล</label>
+                    <input type="text" [(ngModel)]="adminkpi_indiv" name="adminkpi_indiv" placeholder="ระบุชื่อตารางข้อมูลรายบุคคล" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">ลิ้งหน้ารายงาน</label>
+                    <input type="text" [(ngModel)]="adminkpi_report" name="adminkpi_report" placeholder="ระบุลิ้งหน้ารายงาน" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">จังหวัดที่รับผิดชอบตัวชี้วัด</label>
+                    <input type="text" [(ngModel)]="adminowner" name="adminowner" placeholder="ระบุจังหวัดที่รับผิดชอบตัวชี้วัด" size="80">
+                </div>
+                <div class="form-group">
+                    <label for="aForm_1">เอกสารอ้างอิงตัวชี้วัด</label>
+                    <button class="btn btn-outline-success btn-sm" (click)="uploadFile()">
+                        <clr-icon shape="file"></clr-icon>
+                        แนบเอกสาร
+                    </button>
+                </div>
+            </section>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="open = false">
+            <clr-icon shape="times"></clr-icon> ยกเลิก</button>
+        <button type="button" class="btn btn-primary" (click)="saveData()">
+            <clr-icon shape="check"></clr-icon> ตกลง</button>
+    </div>
+</clr-modal>
+
+<app-modal-file-upload #modalUpload></app-modal-file-upload>

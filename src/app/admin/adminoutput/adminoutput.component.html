@@ -1,0 +1,3069 @@
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด PA ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : P&P Excellence (PA)</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                    บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput2 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด PA ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : Service Excellence (PA)</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput2 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput2">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput3 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด PA ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : People Excellence (PA)</span>
+        </div>
+    </div>
+</div>
+<clr-datagrid *ngIf="allAdminOutput3 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput3">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput4 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด PA ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : Governance Excellence (PA)</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput4 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput4">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput5 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดตรวจราชการ ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : คณะที่ 1 การส่งเสริมสุขภาพ ป้องกันโรค และการคุ้มครองผู้บริโภคด้านสุขภาพ</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput5 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput5">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput6 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดตรวจราชการ ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : คณะที่ 2 การพัฒนาระบบบริการ</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput6 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput6">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput7 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดตรวจราชการ ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : คณะที่ 3 การพัฒนาระบบบริหารจัดการ สนับสนุนการจัดบริการสุขภาพ</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput7 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput7">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput8 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดกระทรวง ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : P&P Excellence</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput8 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput8">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput9 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดกระทรวง ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : Service Excellence</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput9 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput9">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput10 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดกระทรวง ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : People Excellence</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput10 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput10">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput401 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาโรคหัวใจ</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput401 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput401">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput402 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาอุบัติเหตุ</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput402 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput402">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput403 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาทารกแรกเกิด</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput403 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput403">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput404 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขามะเร็ง</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput404 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput404">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput405 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาสุขภาพจิตและจิตเวช</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput405 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput405">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput406 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาสุขภาพช่องปาก</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput406 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput406">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput407 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาจักษุวิทยา</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput407 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput407">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput408 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาไต</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput408 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput408">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput409 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาสูตินรีเวชกรรม</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput409 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput409">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput410 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาศัลยกรรม</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput410 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput410">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput411 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาอายุรกรรม</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput411 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput411">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput412 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขากุมารเวชกรรม</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput412 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput412">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput413 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาออร์โธปิดิกส์</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput413 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput413">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput414 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาโรคไม่ติดต่อเรื้อรัง</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput414 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput414">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput415 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาปฐมภูมิและสุขภาพอำเภอ</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput415 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput415">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput416 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขาการแพทย์แผนไทยและการแพทย์ผสมผสาน</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput416 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput416">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput417 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขา RDU</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput417 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput417">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput418 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขา Transplant</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput418 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput418">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput419 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขา Palliative Care</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput419 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput419">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput420 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขา STROKE</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput420 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput420">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput421 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขา COPD</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput421 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput421">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput422 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด Service Plan ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : สาขายาเสพติด</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput422 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput422">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput501 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัด QOF ปี 2563</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : QOF</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput501 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput501">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput601 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดอื่นๆ</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : การได้รับวิตามินตามโครงการจัดบริการส่งเสริมพัฒนาการและการเรียนรู้เด็กไทย ยุค
+                4.0
+            </span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput601 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput601">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+<br>
+<div class="alert alert-app-level alert-info" *ngIf="allAdminOutput602 != ''">
+    <div class="alert-items">
+        <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+                <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">กลุ่มตัวชี้วัด : ตัวชี้วัดอื่นๆ</span>
+            <span class="alert-text">กลุ่มย่อย/หมวด/มิติ ตัวชี้วัด : หญิงตั้งครรภ์</span>
+        </div>
+    </div>
+</div>
+
+<clr-datagrid *ngIf="allAdminOutput602 != ''">
+    <clr-dg-column>
+        <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="folder"></clr-icon> ระดับบันทึกข้อมูล</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="calendar"></clr-icon> ค่าที่ดี</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="error-standard"></clr-icon> สถานะ</clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="user"></clr-icon> ผู้รับผิดชอบ </clr-dg-column>
+    <clr-dg-column>
+        <clr-icon shape="cog"></clr-icon> บันทึกข้อมูล</clr-dg-column>
+
+
+
+    <clr-dg-row *clrDgItems="let l of allAdminOutput602">
+        <clr-dg-cell>{{l.kpi_name}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_detail}} (id:{{l.kpi_id}})</clr-dg-cell>
+        <!-- <clr-dg-cell>{{l.kpi_type}}</clr-dg-cell> -->
+        <clr-dg-cell>
+            <ng-template [ngIf]="l.kpi_type == 0" [ngIfElse]="notFirst1">จังหวัด</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 1" [ngIfElse]="notFirst1">อำเภอ</ng-template>
+            <ng-template [ngIf]="l.kpi_type == 2" [ngIfElse]="notFirst1">หน่วยงาน</ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_scale}}</clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_tar}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_type_data}} -->
+            <ng-container *ngIf="l.kpi_type_data == 0; else elseTemplate">
+                มาก
+            </ng-container>
+            <ng-template #elseTemplate>
+                น้อย
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>
+            <!-- {{l.kpi_status}} -->
+            <ng-container *ngIf="l.kpi_status == 1; else elseTemplate2">
+                เปิด
+            </ng-container>
+            <ng-template #elseTemplate2>
+                ปิด
+            </ng-template>
+        </clr-dg-cell>
+        <clr-dg-cell>{{l.kpi_own}}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-outline-primary btn-sm">
+                <button class="btn" (click)="showEdit(l)">
+                        บันทึกผลงาน
+                    <!-- <clr-icon shape="edit"></clr-icon> -->
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+    <!-- <clr-dg-footer>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} KPI
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+    </clr-dg-footer> -->
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'xl'" [clrModalClosable]="false" ng-if="">
+    <h3 class="modal-title">
+        <clr-icon class="alert-icon" shape="plus-circle"></clr-icon> บันทึกผลงาน</h3>
+    <div class="modal-body">
+        <form>
+            <clr-datagrid>
+                <clr-dg-column>
+                    <clr-icon shape="organization"></clr-icon> ชื่อตัวชี้วัด(ย่อ)</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="shield-check"></clr-icon> ชื่อตัวชี้วัด(เต็ม)</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="angle-double"></clr-icon> ค่ามากสุด</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="tasks"></clr-icon> เกณฑ์</clr-dg-column>
+
+                <clr-dg-row *clrDgItems="let kp of kpiprov; let idx = index;">
+                    <clr-dg-cell>
+                        {{kp.kpi_name}}
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        {{kp.kpi_detail}}
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        {{kp.kpi_scale}}
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        {{kp.kpi_tar}}
+                    </clr-dg-cell>
+                </clr-dg-row>
+            </clr-datagrid>
+        </form>
+        <div class="alert alert-app-level alert-info">
+            <div class="alert-items">
+                <div class="alert-item static">
+                    <div class="alert-icon-wrapper">
+                    </div>
+                    <span class="alert-text">ระดับจังหวัด</span>
+                </div>
+            </div>
+        </div>
+        <form>
+            <section class="form-block">
+                    <clr-datagrid>
+                            <clr-dg-column>
+                                <clr-icon shape="organization"></clr-icon> หน่วยงาน</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="shield-check"></clr-icon> BaseLine</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="folder"></clr-icon> เป้าหมาย</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard"></clr-icon> ผลงาน</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="folder"></clr-icon> เป้าหมาย Q1</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard"></clr-icon> ผลงาน Q1</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q1</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="folder"></clr-icon> เป้าหมาย Q2</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard"></clr-icon> ผลงาน Q2</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q2</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="folder"></clr-icon> เป้าหมาย Q3</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard"></clr-icon> ผลงาน Q3</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q3</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="folder"></clr-icon> เป้าหมาย Q4</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard"></clr-icon> ผลงาน Q4</clr-dg-column>
+                            <clr-dg-column>
+                                <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q4</clr-dg-column>
+                            <!-- <clr-dg-column>
+                                <clr-icon shape="note"></clr-icon> ข้อมูลผลงาน ณ วันที่</clr-dg-column> -->
+            
+                                <clr-dg-row *clrDgItems="let kp of kpiprov; let idx = index;">
+                                    <clr-dg-cell>{{db_level}}</clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_baseline" name="dp_baseline" value="{{kp.dp_baseline}}" #inputbaseline (keyup)="updateDpBaseline(kp,inputbaseline, idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_pop" name="dp_pop" value="{{kp.dp_pop}}" #inputpop (keyup)="updateDpPop(kp,inputpop,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_data" name="dp_data" value="{{kp.dp_data}}" #inputdata (keyup)="updateDpData(kp,inputdata,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_rate" name="dp_rate" value="{{kp.dp_rate}}" #inputrate (keyup)="updateDpRate(kp,inputrate,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_pop1" name="dp_pop1" value="{{kp.dp_pop1}}" #inputpop1 (keyup)="updateDpPop1(kp,inputpop1,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_data1" name="dp_data1" value="{{kp.dp_data1}}" #inputdata1 (keyup)="updateDpData1(kp,inputdata1,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_rate1" name="dp_rate1" value="{{kp.dp_rate1}}" #inputrate1 (keyup)="updateDpRate1(kp,inputrate1,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_pop2" name="dp_pop2" value="{{kp.dp_pop2}}" #inputpop2 (keyup)="updateDpPop2(kp,inputpop2,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_data2" name="dp_data2" value="{{kp.dp_data2}}" #inputdata2 (keyup)="updateDpData2(kp,inputdata2,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_rate2" name="dp_rate2" value="{{kp.dp_rate2}}" #inputrate2 (keyup)="updateDpRate2(kp,inputrate2,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_pop3" name="dp_pop3" value="{{kp.dp_pop3}}" #inputpop3 (keyup)="updateDpPop3(kp,inputpop3,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_data3" name="dp_data3" value="{{kp.dp_data3}}" #inputdata3 (keyup)="updateDpData3(kp,inputdata3,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_rate3" name="dp_rate3" value="{{kp.dp_rate3}}" #inputrate3 (keyup)="updateDpRate3(kp,inputrate3,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_pop4" name="dp_pop4" value="{{kp.dp_pop4}}" #inputpop4 (keyup)="updateDpPop4(kp,inputpop4,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_data4" name="dp_data4" value="{{kp.dp_data4}}" #inputdata4 (keyup)="updateDpData4(kp,inputdata4,idx)">
+                                </clr-dg-cell>
+                                <clr-dg-cell>
+                                    <input type="text" id="dp_rate4" name="dp_rate4" value="{{kp.dp_rate4}}" #inputrate4 (keyup)="updateDpRate4(kp,inputrate4,idx)">
+                                </clr-dg-cell>
+                                <!-- <clr-dg-cell>
+                                    <input type="date" id="kpi_update" name="kpi_update" value="{{ ka.kpi_update | date:'dd-MM-yyyy'}}" #inputkpiupdate (keyup)="updateDpKpidate(ka,inputdpkpiupdate,idx)">
+                                </clr-dg-cell> -->
+                                </clr-dg-row>
+                        </clr-datagrid>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-outline" (click)="open = false">
+                                    <clr-icon shape="times"></clr-icon> ยกเลิก</button>
+                                <button type="button" class="btn btn-primary" (click)="saveData()">
+                                    <clr-icon shape="check"></clr-icon> บันทึก</button>
+                            </div>
+
+            </section>
+        </form>
+        <div class="alert alert-app-level alert-info">
+                <div class="alert-items">
+                    <div class="alert-item static">
+                        <div class="alert-icon-wrapper">
+                        </div>
+                        <span class="alert-text">ระดับอำเภอ</span>
+                    </div>
+                </div>
+            </div>
+        <form>
+            <clr-datagrid>
+                <clr-dg-column>
+                    <clr-icon shape="organization"></clr-icon> หน่วยงาน</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="shield-check"></clr-icon> BaseLine</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="folder"></clr-icon> เป้าหมาย</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard"></clr-icon> ผลงาน</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="folder"></clr-icon> เป้าหมาย Q1</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard"></clr-icon> ผลงาน Q1</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q1</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="folder"></clr-icon> เป้าหมาย Q2</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard"></clr-icon> ผลงาน Q2</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q2</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="folder"></clr-icon> เป้าหมาย Q3</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard"></clr-icon> ผลงาน Q3</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q3</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="folder"></clr-icon> เป้าหมาย Q4</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard"></clr-icon> ผลงาน Q4</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ Q4</clr-dg-column>
+                <!-- <clr-dg-column>
+                    <clr-icon shape="note"></clr-icon> ข้อมูลผลงาน ณ วันที่</clr-dg-column> -->
+
+                    <clr-dg-row *clrDgItems="let ka of kpiamp; let idx = index;">
+                        <clr-dg-cell>{{ka.amphurname}}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_baseline" name="da_baseline" value="{{ka.da_baseline}}" #inputbaselineamp (keyup)="updateBaselineamp(ka,inputbaselineamp, idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_pop" name="da_pop" value="{{ka.da_pop}}" #inputpopamp (keyup)="updatePopamp(ka,inputpopamp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_data" name="da_data" value="{{ka.da_data}}" #inputdataamp (keyup)="updateDataamp(ka,inputdataamp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_rate" name="da_rate" value="{{ka.da_rate}}" #inputrateamp (keyup)="updateRateamp(ka,inputrateamp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_pop1" name="da_pop1" value="{{ka.da_pop1}}" #inputpop1amp (keyup)="updatePop1amp(ka,inputpop1amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_data1" name="da_data1" value="{{ka.da_data1}}" #inputdata1amp (keyup)="updateData1amp(ka,inputdata1amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_rate1" name="da_rate1" value="{{ka.da_rate1}}" #inputrate1amp (keyup)="updateRate1amp(ka,inputrate1amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_pop2" name="da_pop2" value="{{ka.da_pop2}}" #inputpop2amp (keyup)="updatePop2amp(ka,inputpop2amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_data2" name="da_data2" value="{{ka.da_data2}}" #inputdata2amp (keyup)="updateData2amp(ka,inputdata2amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_rate2" name="da_rate2" value="{{ka.da_rate2}}" #inputrate2amp (keyup)="updateRate2amp(ka,inputrate2amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_pop3" name="da_pop3" value="{{ka.da_pop3}}" #inputpop3amp (keyup)="updatePop3amp(ka,inputpop3amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_data3" name="da_data3" value="{{ka.da_data3}}" #inputdata3amp (keyup)="updateData3amp(ka,inputdata3amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_rate3" name="da_rate3" value="{{ka.da_rate3}}" #inputrate3amp (keyup)="updateRate3amp(ka,inputrate3amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_pop4" name="da_pop4" value="{{ka.da_pop4}}" #inputpop4amp (keyup)="updatePop4amp(ka,inputpop4amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_data4" name="da_data4" value="{{ka.da_data4}}" #inputdata4amp (keyup)="updateData4amp(ka,inputdata4amp,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_rate4" name="da_rate4" value="{{ka.da_rate4}}" #inputrate4amp (keyup)="updateRate4amp(ka,inputrate4amp,idx)">
+                    </clr-dg-cell>
+                    <!-- <clr-dg-cell>
+                        <input type="date" id="kpi_update" name="kpi_update" value="{{ ka.kpi_update | date:'dd-MM-yyyy'}}" #inputkpiupdate (keyup)="updateDpKpidate(ka,inputdpkpiupdate,idx)">
+                    </clr-dg-cell> -->
+                    </clr-dg-row>
+                    
+            </clr-datagrid>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline" (click)="open = false">
+                            <clr-icon shape="times"></clr-icon> ยกเลิก</button>
+                        <button type="button" class="btn btn-primary" (click)="saveDataamp()">
+                            <clr-icon shape="check"></clr-icon> บันทึก</button>
+                    </div>
+        </form>
+        <!-- <div class="alert alert-app-level alert-info">
+            <div class="alert-items">
+                <div class="alert-item static">
+                    <div class="alert-icon-wrapper">
+                    </div>
+                    <span class="alert-text">ระดับอำเภอ</span>
+                </div>
+            </div>
+        </div>
+        <form>
+            <clr-datagrid>
+                <clr-dg-column>
+                    <clr-icon shape="home"></clr-icon> หน่วยงาน</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="shield-check"></clr-icon> BaseLine</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="folder"></clr-icon> เป้าหมาย</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard"></clr-icon> ผลงาน</clr-dg-column>
+                <clr-dg-column>
+                    <clr-icon shape="success-standard" class="is-solid"></clr-icon> ร้อยละ,อัตรา,ระดับ</clr-dg-column>
+
+                <clr-dg-row *clrDgItems="let k of kpiamp; let idx = index;">
+                    <clr-dg-cell>{{k.amphurname}}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_baseline" name="da_baseline" value="{{k.da_baseline}}" #inputbaseline (keyup)="updateBaseline(k,inputbaseline,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_pop" name="da_pop" value="{{k.da_pop}}" #inputpop (keyup)="updatePop(k,inputpop,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_data" name="da_data" value="{{k.da_data}}" #inputdata (keyup)="updateData(k,inputdata,idx)">
+                    </clr-dg-cell>
+                    <clr-dg-cell>
+                        <input type="text" id="da_rate" name="da_rate" value="{{k.da_rate}}" #inputrate (keyup)="updateRate(k,inputrate,idx)">
+                    </clr-dg-cell>
+                </clr-dg-row>
+            </clr-datagrid>
+        </form>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" (click)="open = false">
+                <clr-icon shape="times"></clr-icon> ยกเลิก</button>
+            <button type="button" class="btn btn-primary" (click)="saveAmp()">
+                <clr-icon shape="check"></clr-icon> บันทึก</button>
+        </div> -->
+    </div>
+</clr-modal>

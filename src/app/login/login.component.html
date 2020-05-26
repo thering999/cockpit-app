@@ -1,0 +1,34 @@
+<clr-main-container>
+
+    <clr-header class="header-5">
+        <div class="branding">
+            <a href="#" class="nav-link">
+                <clr-icon shape="dashboard" class="has-badge"></clr-icon>
+                <span class="title">Cockpit ระบบข้อมูลตัวชี้วัดสำนักงานสาธารณสุขจังหวัด{{prov_name}} ปีงบประมาณ {{year}}</span>
+            </a>
+        </div>
+        <div class="header-actions">
+            <a href="#" [routerLink]="['/login']" routerLinkActive="active" class="nav-link nav-icon">
+                <!-- <clr-icon shape="login"></clr-icon> -->LOGIN
+                <!-- LOGIN <clr-icon shape="login"></clr-icon> -->
+            </a>
+        </div>
+    </clr-header>
+    <div class="content-container">
+        <div class="content-area">
+            <div class="login-wrapper">
+                <form class="login">
+                    <label class="title">
+                        <h3 class="welcome">Welcome to</h3>
+                        ระบบข้อมูลตัวชี้วัดสำนักงานสาธารณสุขจังหวัด{{prov_name}} ปีงบประมาณ {{year}}
+                    </label>
+                    <div class="login-group">
+                        <input class="username" type="text" [(ngModel)]="username" name="username" placeholder="Username">
+                        <input class="password" type="password" [(ngModel)]="password" name="password" placeholder="Password">
+                        <button type="submit" class="btn btn-primary" (click)="Login()" [disabled]="!username || !password">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</clr-main-container>

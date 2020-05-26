@@ -1,0 +1,47 @@
+<div class="dg-wrapper">
+    <clr-datagrid [clrDgLoading]="loading" class="datagrid-compact dg-cell-bg">
+        <!-- <clr-dg-column> </clr-dg-column> -->
+        <clr-dg-column>
+            <clr-icon shape="building" class="is-solid"></clr-icon> สถานบริการ</clr-dg-column>
+        <clr-dg-column>
+            <clr-icon shape="success-standard"></clr-icon> เป้าหมาย</clr-dg-column>
+        <clr-dg-column>
+            <clr-icon shape="success-standard" class="is-solid"></clr-icon> ผลงาน</clr-dg-column>
+        <clr-dg-column>
+            <clr-icon shape="line-chart"></clr-icon> ร้อยละ</clr-dg-column>
+        <clr-dg-column> แถบสถานะ </clr-dg-column>
+        <!-- <clr-dg-column> </clr-dg-column>
+        <clr-dg-column> </clr-dg-column>
+        <clr-dg-column> </clr-dg-column> -->
+        <clr-dg-row *clrDgItems="let k of kpiDetail">
+            <!-- <clr-dg-cell></clr-dg-cell> -->
+            <!-- <clr-dg-action-overflow>
+                <button class="action-item" (click)="onEdit(user)">Edit</button>
+            </clr-dg-action-overflow> -->
+            <clr-dg-cell>{{k.names}}</clr-dg-cell>
+            <clr-dg-cell>{{k.do_pop}}</clr-dg-cell>
+            <clr-dg-cell>{{k.do_data}}</clr-dg-cell>
+            <clr-dg-cell>{{k.do_rate}}</clr-dg-cell>
+            <clr-dg-cell>
+                <span class="boxOutProgress floatLeft">
+                    <div *ngIf="k.kpi_type_data == 0">
+                        <div *ngIf="k.do_rate >= k.kpi_tar" class="boxInProgressGreen" [ngStyle]="{'width':k.do_rate+'%'}"></div>
+                        <div *ngIf="k.do_rate < k.kpi_tar" class="boxInProgressRed" [ngStyle]="{'width':k.do_rate+'%'}"></div>
+                    </div>
+                    <div *ngIf="k.kpi_type_data != 0">
+                        <div *ngIf="k.do_rate <= k.kpi_tar" class="boxInProgressGreen" [ngStyle]="{'width':k.do_rate+'%'}"></div>
+                        <div *ngIf="k.do_rate > k.kpi_tar" class="boxInProgressRed" [ngStyle]="{'width':k.do_rate+'%'}"></div>
+                    </div>
+                </span>
+                <span class="floatRight">{{k.do_rate}}%</span>
+            </clr-dg-cell>
+            <!-- <clr-dg-cell></clr-dg-cell>
+            <clr-dg-cell></clr-dg-cell>
+            <clr-dg-cell></clr-dg-cell> -->
+        </clr-dg-row>
+        <clr-dg-footer>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} users
+            <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="100"></clr-dg-pagination>
+        </clr-dg-footer>
+    </clr-datagrid>
+</div>
